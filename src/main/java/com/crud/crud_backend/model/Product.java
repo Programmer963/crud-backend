@@ -5,6 +5,7 @@ import lombok.*;
 
 import java.math.BigDecimal;
 
+ import jakarta.validation.constraints.*;
 @Entity
 @Data
 @NoArgsConstructor
@@ -14,9 +15,11 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @NotBlank(message = "Название обязательно")
     private String name;
+    @NotBlank(message = "Описание обязательно")
     private String description;
+    @DecimalMin(value = "0.0", inclusive = false, message = "Цена должна быть больше 0")
     private BigDecimal price;
 
     public Long getId() {return id;}
